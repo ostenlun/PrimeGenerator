@@ -16,9 +16,10 @@ The main features are:
 ## Usage
 Call the web API:
 
-primes?n=x&algorithm=y
+*/primes?n=x&algorithm=y*
 
-where x is the number to generate prime numbers to and algorithm is either 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)
+where x is the number to generate prime numbers to and algorithm is either 1, 2 or 3 
+(1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)
 
 ## Project Status
 Project is: _complete_
