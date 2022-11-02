@@ -24,7 +24,7 @@ where x is the number to generate prime numbers to and algorithm is either 1, 2 
 
 The prime numbers are returned in JSON format:
 
-*[2,3,5,7]*
+*[2,3,5,7, ...]*
 
 ## Project Status
 Project is: _complete_
