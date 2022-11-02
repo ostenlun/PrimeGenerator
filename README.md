@@ -2,7 +2,7 @@
 Spring Boot app that generates prime numbers using different algorithms
 
 ## General Information
-This is a Spring Boot backend web API.
+This is a Spring Boot backend web API
 
 ## Technologies Used
 - Java
@@ -12,9 +12,10 @@ This is a Spring Boot backend web API.
 ## Features
 The main features are:
 - Calculate prime numbers up to a given number and using a selected algorithm
+- Returns the prime numbers in JSON format
 
 ## Usage
-Call the web API:
+Call the web API to get the prime numbers in JSON format:
 
 */primes?n=x&algorithm=y*
 
