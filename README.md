@@ -15,12 +15,16 @@ The main features are:
 - Returns the prime numbers in JSON format
 
 ## Usage
-Call the web API to get the prime numbers in JSON format:
+Call the web API to get the prime numbers:
 
 */primes?n=x&algorithm=y*
 
 where x is the number to generate prime numbers to and algorithm is either 1, 2 or 3 
 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)
+
+The prime numbers are returned in JSON format:
+
+*[2,3,5,7]*
 
 ## Project Status
 Project is: _complete_
