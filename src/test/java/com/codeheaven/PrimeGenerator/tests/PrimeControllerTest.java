@@ -51,8 +51,14 @@ class PrimeControllerTest {
 	private TestRestTemplate testRestTemplate;
 
 	@Test
-	public void primesShouldReturnNotEmptyList() throws Exception {
-		assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/primes?n=15&algorithm=1",
+	public void primesJsonShouldReturnNotEmptyList() throws Exception {
+		assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/primesjson?n=15&algorithm=1",
+			String.class)).isNotEmpty();
+	}
+
+	@Test
+	public void primesXmlShouldReturnNotEmptyList() throws Exception {
+		assertThat(this.testRestTemplate.getForObject("http://localhost:" + port + "/primesxml?n=15&algorithm=1",
 			String.class)).isNotEmpty();
 	}
 }
