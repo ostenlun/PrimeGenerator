@@ -52,7 +52,7 @@ public class PrimeController {
 
 	@GetMapping("/")
 	public String index() {
-		return "Call /primes?n=x&algorithm=y where n = max number to generate prime numbers to and algorithm = 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)";
+		return "<p>Please call <br><br><b>/primesjson?n=x&algorithm=y</b> or <br><br><b>/primesxml?n=x&algorithm=y</b> <br><br>to get either JSON or XML where n = max number to generate prime numbers to and algorithm (optional) = 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)</p>";
 	}
 	
 	/**
