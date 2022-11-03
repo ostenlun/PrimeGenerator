@@ -1,10 +1,13 @@
 package com.codeheaven.PrimeGenerator.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -21,11 +24,13 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.NumberFormatException;
-import com.codeheaven.PrimeGenerator.services.*;
+import com.codeheaven.PrimeGenerator.services.PrimeService;
 
 /**
  * PrimeController handles the REST API calls for generating prime numbers.
@@ -38,6 +43,10 @@ import com.codeheaven.PrimeGenerator.services.*;
 public class PrimeController {
 	private static final Logger Log = LoggerFactory.getLogger(PrimeController.class);
 
+	private enum ResponseType { JSON, XML };
+	private final String JSON = "json";
+	private final String XML = "xml";
+	
 	@Autowired
 	private PrimeService primeService;
 
@@ -46,25 +55,45 @@ public class PrimeController {
 		return "Call /primes?n=x&algorithm=y where n = max number to generate prime numbers to and algorithm = 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)";
 	}
 	
-	// Retrieves all primes up to the given parameter
-	@GetMapping("/primes")
+	/**
+	 * Handles requests to get prime numbers in JSON format
+	 * 
+	 * @param n: max number to generate prime numbers to
+	 * @param algorithm: 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)
+	 * @return
+	 */
+	@RequestMapping(
+			value = "/primesjson", 
+			method = RequestMethod.GET, 
+			consumes = MediaType.ALL_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@CrossOrigin()
-	public List<Integer> primes(@RequestParam String n, @RequestParam String algorithm) {
+	@ResponseBody
+	public List<Integer> primesJson(@RequestParam String n, @RequestParam(name="algorithm", required=false) String algorithm) {
 		if (primeService != null) {
-			if (algorithm.equals("1")) {
-				return primeService.sieveOfEratosthenes(Integer.parseInt(n));
-			} else if (algorithm.equals("2")) {
-				return primeService.primeNumbersTill(Integer.parseInt(n));
-			} else if (algorithm.equals("3")) {
-				return primeService.primeNumbersBruteForce(Integer.parseInt(n));
-			} 
+			return primeService.generatePrimeNumbers(n, algorithm);
 		}
 		return null;
 	}
-	
-	@GetMapping("/error")
+
+	/**
+	 * Handles requests to get prime numbers in XML format
+	 * 
+	 * @param n: max number to generate prime numbers to
+	 * @param algorithm: 1, 2 or 3 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force)
+	 * @return
+	 */
+	@RequestMapping(
+			value = "/primesxml", 
+			method = RequestMethod.GET, 
+			consumes = MediaType.ALL_VALUE,
+			produces = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin()
-	public String error() {
-		return "Error";
+	@ResponseBody
+	public List<Integer> primesXml(@RequestParam String n, @RequestParam(name="algorithm", required=false) String algorithm) {
+		if (primeService != null) {
+			return primeService.generatePrimeNumbers(n, algorithm);
+		}
+		return null;
 	}
 }

@@ -17,9 +17,31 @@ import org.springframework.stereotype.Service;
 public class PrimeService {
 
 	/**
+	 * Calls the related primenumber algorithms based on algorithm parameters.
+	 * 
+	 * @param algorithm: number of the algorithm
+	 * @param n: max number to generate prime numbers to
+	 * @return list of the prime numbers
+	 */
+	public List<Integer> generatePrimeNumbers(String n, String algorithm) {
+		if (algorithm == null) {
+			algorithm = "1";
+		}
+
+		if (algorithm.equals("1")) {
+			return sieveOfEratosthenes(Integer.parseInt(n));
+		} else if (algorithm.equals("2")) {
+			return primeNumbersTill(Integer.parseInt(n));
+		} else if (algorithm.equals("3")) {
+			return primeNumbersBruteForce(Integer.parseInt(n));
+		}
+		return null;
+	}
+
+	/**
 	 * Generates prime numbers up to the given number n with Sieve of Eratosthenes algorithm
 	 * 
-	 * @param n max number to generate prime numbers to
+	 * @param n: max number to generate prime numbers to
 	 * @return list of the prime numbers
 	 */
     public List<Integer> sieveOfEratosthenes(int n) {
@@ -44,7 +66,7 @@ public class PrimeService {
 	/**
 	 * Generates prime numbers up to the given number n with brute force algorithm
 	 * 
-	 * @param n max number to generate prime numbers to
+	 * @param n: max number to generate prime numbers to
 	 * @return list of the prime numbers
 	 */
     public List<Integer> primeNumbersBruteForce(int max) {
@@ -69,7 +91,7 @@ public class PrimeService {
 	/**
 	 * Generates prime numbers up to the given number n with Java 8 algorithm
 	 * 
-	 * @param n max number to generate prime numbers to
+	 * @param n: max number to generate prime numbers to
 	 * @return list of the prime numbers
 	 */
     public List<Integer> primeNumbersTill(int max) {
