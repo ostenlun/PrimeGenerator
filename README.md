@@ -12,7 +12,7 @@ This is a Spring Boot backend web API
 ## Features
 The main features are:
 - Calculate prime numbers up to a given number and using a selected algorithm
-- Returns the prime numbers in JSON format
+- Returns the prime numbers in JSON or XML format
 
 ## Usage
 Call the web API to get the prime numbers in JSON format:
@@ -39,7 +39,7 @@ Call the web API to get the prime numbers in XML format:
 where n is the number to generate prime numbers to and algorithm (optional) is either 1, 2 or 3 
 (1 = Sieve of Eratosthenes, 2 = Java 8, 3 = Brute force).
 
-The prime numbers are returned in JSON format:
+The prime numbers are returned in XML format:
 
 ```xml
 <List>
